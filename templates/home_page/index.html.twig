@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MP DSIR{% endblock %}
+
+{% block body %}
+<style >
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { padding: 2px 6px;}
+   h1{ color : #f8e8ff;}
+
+    h6 { color: #f8e8ff; }
+    .postionfinal{ position: absolute;
+        left: 72%;
+
+        height: 100px;
+    top :8%;}
+    .product{
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 220px;
+        display: block;
+        position: relative;
+        margin-top: -10px;
+    vertical-align: middle;}
+
+
+    .product:hover{
+        transform: translateY(0px)   translateX(50px) rotateY(0deg) rotateX(0deg) scale(1.2);}
+.textt{margin-left: 200px;}
+</style>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<div class="postionfinal">
+</div>
+
+    {% else %}
+        <div class="postionfinal">
+            <a   class="btn" aria-current="page"href="{{ path('app_login') }}" class="text-uppercase"><i class="fa fa-sign-in"></i>Login</a>
+            <a  class="btn" aria-current="page" href="{{ path('app_register') }}" class="text-uppercase"><i class="fa fa-user-plus"></i>Inscription</a>
+        </div>
+    {% endif %}
+<div class="example-wrapper">
+
+    <br>
+    <br>
+   <centre > <h1>Master Pro DSIR - GLNT</h1></centre>
+
+
+    <h6>Bienvenue sur votre bibliothèque !</h6>
+</div>
+    <div   style="margin-top: -100px;" class="products-slick" data-nav="#slick-nav-1">
+
+
+        {% for livre in livres %}
+            <div  class="product" >
+
+
+                <div   class="card" style="width: 18rem; margin-left: -25px; margin-top: 5px;">
+                    <div  class="card-body">
+                        <h5 class="card-title">{{ livre.titre }}</h5>
+                        <h4 class="card-subtitle mb-2 text-muted">{{ livre.editeur.nomEditeur }} - {{ livre.dateEdition ? livre.dateEdition|date('Y-m-d') : '' }}</h4>
+
+                        <p class="card-link">{{ livre.nbPages }} pages</p>
+                        <p class="card-link">{{ livre.prix }} TND</p>
+                        <br><br>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        {% else %}
+
+            <span class=" alert alert-warning">Auccun livre trouvé</span>
+
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}

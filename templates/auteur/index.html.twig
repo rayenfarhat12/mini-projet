@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+
+{% block body %}
+    <style>
+
+        #table{
+
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 80px;
+            padding-right: 80px;
+            background-color:   transparent;
+        }
+
+        tr {
+            border-radius: 3px;
+            padding: 10px 15px ;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+
+        }
+        .table-header {
+            background-color: #95A5A6;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+
+        }
+        .table-row {
+            background-color: #ffffff;
+            box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+        }}
+    </style>
+    <br>
+    <h1>Auteur index</h1>
+
+    <table id="table"  class="table-row table">
+        <thead>
+        <tr class="table-header">
+                <th>Id</th>
+                <th>Prenon</th>
+                <th>Nom</th>
+                <th>Biographie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auteur in auteurs %}
+            <tr class="table-row">
+                <td>{{ auteur.id }}</td>
+                <td>{{ auteur.prenon }}</td>
+                <td>{{ auteur.nom }}</td>
+                <td>{{ auteur.biographie }}</td>
+                <td>
+                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}">show</a>
+                    <a href="{{ path('auteur_edit', {'id': auteur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<br>
+
+    <a  class="btn btn-lg " href="{{ path('auteur_new') }}">Create new</a>
+
+{% endblock %}

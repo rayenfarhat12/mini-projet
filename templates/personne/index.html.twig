@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personne index{% endblock %}
+
+{% block body %}
+    <style>
+        #table{
+
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 80px;
+            padding-right: 80px;
+            background-color:   transparent;
+        }
+
+        tr {
+            border-radius: 3px;
+            padding: 10px 15px ;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+        }
+        .table-header {
+            background-color: #95A5A6;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+
+        }
+        .table-row {
+            background-color: #ffffff;
+            box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+        }</style>
+    <br>
+    <h1>Personne index</h1>
+
+    <table id="table"  class="table-row table">
+        <thead>
+        <tr class="table-header">
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Datn</th>
+                <th>Email</th>
+                <th>Adr</th>
+                <th>Salaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personne in personnes %}
+            <tr class="table-row">
+                <td>{{ personne.id }}</td>
+                <td>{{ personne.prenom }}</td>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.datn ? personne.datn|date('Y-m-d') : '' }}</td>
+                <td>{{ personne.email }}</td>
+                <td>{{ personne.adr }}</td>
+                <td>{{ personne.salaire }}</td>
+                <td>
+                    <a href="{{ path('personne_show', {'id': personne.id}) }}">show</a>
+                    <a href="{{ path('personne_edit', {'id': personne.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a  class="btn btn-lg " href="{{ path('personne_new') }}">Create new</a>
+
+    <a  class="btn btn-lg " href="/register">ajouter un agent </a>
+{% endblock %}
